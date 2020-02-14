@@ -1,0 +1,35 @@
+.btn {
+    border: none;
+    background: none;
+    font-family: inherit;
+    padding: 10px 27px;
+    cursor: pointer;
+    transition: 0.25s;
+    font-weight: 600;
+    border: 2px solid;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background: none;
+}
+
+.btn-main {
+    background: var(--primary-dark);
+    color: var(--white);
+    border-color: var(--primary-dark);
+}
+
+.btn-main:hover {
+    color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+}
+
+.btn-secondary:hover {
+    color: var(--white);
+}

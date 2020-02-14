@@ -1,0 +1,28 @@
+.primary-color {
+    color: var(--primary-dark);
+}
+
+* {
+    line-height: 1.4;
+}
+
+
+h1 {
+    font-size: 55px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: var(--black);
+    text-align: center;
+}
+
+p {
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}

@@ -1,0 +1,15 @@
+section {
+    padding: 60px 40px;
+    color: var(--black);
+}
+
+section .grid {
+    grid-template-rows: 300px;
+    grid-template-columns: 5fr 4fr;
+    display: grid;
+}
+
+section .illustration {
+    max-height: 300px;
+    transform: translateY(-50px);
+}

@@ -1,0 +1,13 @@
+header {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #89c1be;
+    color: var(--white);
+    padding: 10px 15px;
+}
+
+header .buttons button {
+    margin-right: 10px;
+}
