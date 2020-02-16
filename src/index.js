@@ -8,5 +8,7 @@ import "./css/typography.css";
 import "./css/section.css";
 import "./css/header.css";
 import "./css/buttons.css";
+import "./css/form.css";
+
 
 ReactDOM.render(<App />, document.querySelector("#root"));

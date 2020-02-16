@@ -1,6 +1,7 @@
 section {
     padding: 60px 40px;
     color: var(--black);
+    position: relative;
 }
 
 section .grid {
@@ -12,4 +13,16 @@ section .grid {
 section .illustration {
     max-height: 300px;
     transform: translateY(-50px);
+}
+
+section#form::after {
+    content: "";
+    position: absolute;
+    background-color: var(--primary-light);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    pointer-events: none;
 }

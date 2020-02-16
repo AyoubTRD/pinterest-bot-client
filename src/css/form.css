@@ -1,0 +1,109 @@
+#form form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+label {
+    display: inline-block;
+    margin-right: 30px;
+    user-select: none;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.input-block {
+    display: block;
+}
+
+.label {
+    color: #333;
+    font-size: 15px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.tip {
+    color: var(--black);
+    font-size: 13px;
+    pointer-events: none;
+}
+
+input {
+    padding: 3px 5px;
+    background: none;
+    transition: 0.1s;
+    border: 1px solid var(--black);
+    width: 250px;
+    max-width: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input:hover {
+    background: white;
+    border-color: var(--primary-light);
+}
+
+input:focus {
+    background: white;
+    border-color: var(--primary-dark);
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: var(--primary-light);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
