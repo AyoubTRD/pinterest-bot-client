@@ -92,7 +92,7 @@ const Form = () => {
   return (
     <section id="form">
       <h2>Start your Bot</h2>
-      { isOver ?
+      { !isOver ?
         <>
         <form onChange={handleChange} onSubmit={handleSubmit}>
         <h4>Images source</h4>
@@ -202,7 +202,7 @@ const Form = () => {
       </form>
       {error ? <p className="error"><span>{error}</span></p> : null}
       </>
-      : <h4>Your bot is running</h4>
+      : <h4 className={"primary-color"}>Your bot is running</h4>
       }
     </section>
   )
