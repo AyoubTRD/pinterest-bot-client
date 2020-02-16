@@ -7,6 +7,8 @@ const HowItWorks = () => {
   return (
     <section id="howitworks">
       <h2>How it Works</h2>
+      <div className="container">
+
       <div className="grid">
         <div>
           <p>
@@ -21,6 +23,7 @@ const HowItWorks = () => {
           </ScrollButton>
         </div>
         <Illustration />
+      </div>
       </div>
     </section>
   )

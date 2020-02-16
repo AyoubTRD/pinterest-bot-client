@@ -26,3 +26,23 @@ section#form::after {
     opacity: 0.1;
     pointer-events: none;
 }
+
+.container {
+    margin: 0 auto;
+    max-width: 1240px;
+}
+
+@media all and (max-width: 750px) {
+    .illustration {
+        display: none;
+    }
+    section .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media all and (max-width: 500px) {
+    section {
+        padding: 40px 20px;
+    }
+}
