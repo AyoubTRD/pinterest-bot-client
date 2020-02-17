@@ -4,8 +4,6 @@ import botApi from "../api/bot"
 
 const Form = () => {
 
-  const urlParams = new URLSearchParams(window.location.search);
-
   const [formInfo, setFormInfo] = useState({
     delayMin: 2,
     delayMax: 5
@@ -69,7 +67,6 @@ const Form = () => {
       if(data.source === "profile") {
         data.sourceInfo = [data.sourceInfo]
       }
-      data.token = window.PDK.getSession().accessToken;
       await botApi.post("/instagram-bot", data);
       document.querySelector("#form").classList.remove("loading");
       setOver(true);
@@ -85,6 +82,10 @@ const Form = () => {
     window.PDK.login({
       scope: "write_public",
       redirect_uri: "https://pinterest-bot.netlify.com/"
+    }, function() {
+      const newInfo = {...formInfo}
+      newInfo.auth = window.PDK.getSession().accessToken
+      setFormInfo(newInfo)
     })
 
 }
