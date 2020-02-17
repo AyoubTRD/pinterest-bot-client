@@ -84,11 +84,10 @@ const Form = () => {
   const authenticate = () => {
     window.PDK.login({
       scope: "write_public",
-      redirect_uri: "https://pinterst-bot.netlify.com/"
+      redirect_uri: "https://pinterest-bot.netlify.com/"
     })
-  }
 
-
+}
   return (
     <section id="form">
       <h2>Start your Bot</h2>
