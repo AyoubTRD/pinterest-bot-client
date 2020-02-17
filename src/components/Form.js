@@ -3,6 +3,9 @@ import React, {useState} from "react";
 import botApi from "../api/bot"
 
 const Form = () => {
+
+  const urlParams = new URLSearchParams(window.location.search);
+
   const [formInfo, setFormInfo] = useState({
     delayMin: 2,
     delayMax: 5
@@ -23,23 +26,16 @@ const Form = () => {
       newInfo[e.target.id] = e.target.value
     }
     setFormInfo(newInfo);
-    window.scrollTo(0, document.body.scrollHeight)
   };
 
   const handleSubmit = async e => {
     e.preventDefault()
     document.querySelector("#form").classList.add("loading");
     const urlRegex = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/
-    const emailRegex =  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     try {
       if(!urlRegex.test(formInfo.link)) {
         setError("Please provide a correct url: https://www.example.com/...")
-        document.querySelector("#form").classList.remove("loading");
-        return
-      }
-      if (!emailRegex.test(formInfo.email) || !formInfo.email) {
-        setError("Please provide a correct email")
         document.querySelector("#form").classList.remove("loading");
         return
       }
@@ -68,16 +64,12 @@ const Form = () => {
         document.querySelector("#form").classList.remove("loading");
         return
       }
-      if(formInfo.password.length <= 4) {
-        setError("Please provide a correct password")
-        document.querySelector("#form").classList.remove("loading");
-        return
-      }
 
       const data = {...formInfo};
       if(data.source === "profile") {
         data.sourceInfo = [data.sourceInfo]
       }
+      data.token = window.PDK.getSession().accessToken;
       await botApi.post("/instagram-bot", data);
       document.querySelector("#form").classList.remove("loading");
       setOver(true);
@@ -89,10 +81,23 @@ const Form = () => {
     
   }
 
+  const authenticate = () => {
+    window.PDK.login({
+      scope: "write_public",
+      redirect_uri: "https://pinterst-bot.netlify.com/"
+    })
+  }
+
+
   return (
     <section id="form">
       <h2>Start your Bot</h2>
-      { !isOver ?
+      {
+        !formInfo.auth ?
+          <button className={"btn btn-pinterest"} onClick={authenticate}>Login to Pinterest</button>
+          : null
+      }
+      { !isOver && formInfo.auth ?
         <>
         <form onChange={handleChange} onSubmit={handleSubmit}>
         <h4>Images source</h4>
@@ -137,31 +142,16 @@ const Form = () => {
 
             {
               formInfo.sourceInfo ?
-              <>
-                <h4>Pinterest information</h4>
-                <div className="form-control">
-                  <label htmlFor="email" className="label">email</label>
-                  <input type="text" className="input-block" id={"email"} name={"email"} />
-                  <span className="tip">Please provide the correct email of your pinterest account</span>
-                </div>
-                <div className="form-control">
-                  <label htmlFor="password" className="label">password</label>
-                  <input type="password" className="input-block" id={"password"} name={"password"} />
-                  <span className="tip">Please provide the correct password of your pinterest account</span>
-                </div>
+                <>
+                  <div className="form-control">
+                    <label htmlFor="board" className="label">board</label>
+                    <input type="text" id="board" className="input-block" name={"board"}/>
+                    <span className="tip">Make sure the board is already created and is correctly capitalized</span>
+                  </div>
+                </>
+        : null
 
-                {
-                  formInfo.email && formInfo.password ?
-                    <>
-                      <div className="form-control">
-                        <label htmlFor="board" className="label">board</label>
-                        <input type="text" id="board" className="input-block" name={"board"}/>
-                        <span className="tip">Make sure the board is already created and is correctly capitalized</span>
-                      </div>
-                    </>
-                    : null
-                }
-
+            }
                 {
                   formInfo.board ?
                     <>
@@ -187,7 +177,7 @@ const Form = () => {
                 }
 
                 {
-                  formInfo.board && formInfo.link && formInfo.email && formInfo.password ?
+                  formInfo.board && formInfo.link ?
                     <button type={"submit"} className={"btn btn-main"}>Start the bot</button>
                     : null
                 }
@@ -195,14 +185,12 @@ const Form = () => {
               </>
             : null
             }
-            </>
-          : null
-        }
+
 
       </form>
       {error ? <p className="error"><span>{error}</span></p> : null}
       </>
-      : <h4 className={"primary-color"}>Your bot is running</h4>
+      : formInfo.auth ? <h4 className={"primary-color"}>Your bot is running</h4> : null
       }
     </section>
   )

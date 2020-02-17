@@ -33,3 +33,13 @@
 .btn-secondary:hover {
     color: var(--white);
 }
+
+.btn-pinterest {
+    background-color: #E60023;
+    color: white;
+}
+
+.btn-pinterest:hover {
+    background-color: #E60023;
+    color: white;
+}
